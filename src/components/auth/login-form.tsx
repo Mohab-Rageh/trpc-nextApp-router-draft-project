@@ -17,7 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
-  email: z.string().email({
+  email: z.email({
     message: "Please enter a valid email address",
   }),
   password: z.string().min(6, {
@@ -52,7 +52,7 @@ export function LoginForm() {
 
       router.push("/dashboard");
       router.refresh();
-    } catch (error) {
+    } catch {
       setError("Something went wrong");
     }
   }
@@ -90,15 +90,11 @@ export function LoginForm() {
             </FormItem>
           )}
         />
-        {error && (
-          <div className="text-sm text-red-500">
-            {error}
-          </div>
-        )}
+        {error && <div className="text-sm text-red-500">{error}</div>}
         <Button type="submit" className="w-full">
           Sign In
         </Button>
       </form>
     </Form>
   );
-} 
+}
